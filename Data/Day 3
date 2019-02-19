@@ -1,0 +1,77 @@
+在实现数据结构时，应该先在开头声明出函数，再在后面定义函数，以免静态编译错误。
+gcc filename.type 编译源文件
+./a.out <filename> 关联运行
+
+gdb 调试程序 debug
+gdb ./a.out 进入调试程序
+br 设置断点
+display 每运行一次输出值
+bt 列出调用栈
+
+grep "***" 检索(弱类型，无语义冲突可省略""
+
+端口号 0-65535
+
+守护进程：死循环+后台进程
+
+0-1024 周知端口 每个端口有固定类型的服务，别人可以通过端口了解你计算机的工作的状况
+TCP端口：80/8080/8088
+
+
+
+面试算法：
+
+归并排序
+day3test1.c
+
+void mergeSort (int *num, int l, int r) {
+    if (r <= l) {
+        if (r - l == l && num[l] > num[r]) {
+            swap(num[l], num[r]);
+        }
+        return ;
+    }
+    int mid = (l + r) >> 1;
+    mergeSort(num, l, mid);
+    mergeSort(num, mid + 1, r);
+    int *temp = (int *)malloc(sizeof(int) * (r - l + 1));
+    int p1 = l, p2 = mid + 1, k = 0;
+    while (p1 <= mid || p2 <= r) {
+        if (p2 > r || (p1 <= mid && num[p1] <= num[p2])) {
+            temp[k++] = num[p1++];
+        } else {
+            temp[k++] = num[p2++];
+        }
+    }
+    memcpy(num + l, temp, sizeof(int) * (r - l + 1));
+    free(temp);
+}
+
+
+快速排序
+day3test2.c
+
+优化后的超级快排
+void quickSort (int *num, int l, int r) {
+    while(l < r) {
+        int x = l, y = r, z = num[(l + r) >> 1];
+        do {
+            while (num[x] < z) x++;
+            while (num[y] > z) y--;
+            if (x <= y) {
+                swap(num[x], num[y]);
+                ++x, --y;
+            }
+        }while (x <= y);
+        quickSort(num, x, r);
+        r = y;
+    }
+    return;
+}
+
+
+
+TIPS:
+i < n - 1 && printf()    只有前一个成立才执行后面的语句
+
+
