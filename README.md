@@ -1,2 +1,2 @@
-# HomeWork
-This proj is used to storage my homework code
+# EulerProject
+This proj is used to storage my EulerProject homework code
